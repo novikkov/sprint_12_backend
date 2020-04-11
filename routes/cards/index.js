@@ -4,11 +4,11 @@ const fsPromises = require('fs').promises;
 
 router.get('/', (req, res) => {
   fsPromises.readFile(path.join(__dirname, '../../data/cards.json'), { encoding: 'utf8' })
-    .then(data => {
+    .then((data) => {
       res.send(JSON.parse(data));
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
+      res.status(500).send({ message: 'Запрашиваемый файл не найден' });
     });
 });
 
